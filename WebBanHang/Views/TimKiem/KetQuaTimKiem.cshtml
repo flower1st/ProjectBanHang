@@ -1,0 +1,43 @@
+﻿@using WebBanHang.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<SANPHAM>
+@{
+    ViewBag.Title = "KetQuaTimKiem";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<h2 style="text-align:center; color:red">Kết quả tìm kiếm</h2>
+<div>@ViewBag.Thongbao</div>
+<div class="row">
+    @foreach (var Sanpham in Model)
+    {
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <a href="@Url.Action("Details","WEB_06", new { id = Sanpham.Masanpham })">
+                    <img alt="@Sanpham.Tensanpham" src="~/ImagesSP/@Sanpham.Anhbia" width="100" />
+
+                    <div>
+                        <br />
+                        <h4 style="text-align:center">
+                            @Sanpham.Tensanpham
+                        </h4>
+                        <p></p>
+
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+</table>
+
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("KetQuaTimKiem", new { page = page, @sTuKhoa = ViewBag.TuKhoa }))
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+
+
+

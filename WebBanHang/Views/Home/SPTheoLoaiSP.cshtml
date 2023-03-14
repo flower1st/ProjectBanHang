@@ -1,0 +1,47 @@
+﻿@using WebBanHang.Models
+@using PagedList.Mvc;
+@model PagedList.PagedList<SANPHAM>
+@{
+    ViewBag.Title = "SPTheoLoaiSP";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<h2 style="text-align:center;color:red">DANH SÁCH SẢN PHẨM </h2>
+<div class="row">
+    @foreach (var Sanpham in Model)
+    {
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="thumbnail">
+                <a href="@Url.Action("Details","Home", new { id = Sanpham.Masanpham })">
+                    <img alt="@Sanpham.Tensanpham" src="~/ImagesSP/@Sanpham.Anhbia" width="100" />
+
+                    <div>
+                        <br />
+                        <h4 style="text-align:center">
+                            @Sanpham.Tensanpham
+                        </h4>
+                        <h5 style="text-align:center; color:darkred">
+                            @String.Format("{0:0,0}", @Sanpham.Giaban) VNĐ
+                        </h5>
+                        <p></p>
+
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
+
+<div class="MenuTrang text-center p-3">
+    @Html.PagedListPager(Model, page => Url.Action("SPTheoLoaiSP", new { page = page }))
+</div>
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
+
+
+
+
+

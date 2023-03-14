@@ -1,0 +1,248 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/web/bootstrap.min.css" rel="stylesheet" />
+
+
+    <!-- Custom CSS -->
+    <link href="~/Content/web/shop-homepage.css" rel="stylesheet" />
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        @Html.ActionLink("Trang Chủ", "Index", "Home")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Giới Thiệu", "Gioithieu", "User")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Liên Hệ", "Lienhe", "User")
+                    </li>
+                    <li>
+                        @Html.ActionLink("Blog", "Blogtintuc", "User")
+                    </li>
+
+                    @if (Session["Taikhoan"] != null)
+                    {
+                        WebBanHang.Models.KHACHHANG info = (WebBanHang.Models.KHACHHANG)Session["Taikhoan"];
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                @info.HoTen
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    @Html.ActionLink("Đăng Xuất", "Logout", "User")
+                                </li>
+                            </ul>
+                        </li>
+
+                    }
+                    else
+                    {
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Tài Khoản
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    @Html.ActionLink("Đăng Nhập", "Dangnhap", "User")
+                                </li>
+                                <li>
+                                    @Html.ActionLink("Đăng Ký", "Dangky", "User")
+                                </li>
+                            </ul>
+                        </li>
+
+
+
+
+                    }
+
+                    @*<li>
+                            @Html.Action("GiohangPartial", "GioHang")
+                        </li>*@
+
+
+                </ul>
+                <div class="nav navbar-right" style="margin-top: 13px;">
+                    <ul>
+                        <li id="txtTimKiem">
+                            @using (Html.BeginForm("KetQuaTimKiem", "TimKiem", FormMethod.Post))
+                            {
+                                @Html.TextBox("txtTimKiem", "", htmlAttributes: new { @class = "TextBoxTimKiem", @placeholder = "Nhập vào từ khóa cần tìm" })
+                                <button type="submit"><i class="glyphicon glyphicon-search"></i><img src="~/Images/search-128.png" /></button>
+                            }
+                        </li>
+                    </ul>
+                </div>
+                <div class="giohang">
+                    <ul>
+                        @Html.Action("GiohangPartial", "GioHang")
+                    </ul>
+                </div>
+
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+
+        <!-- /.container -->
+    </nav>
+
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-3" style="background-color:aquamarine">
+                <p class="lead" style="text-align:center;background-color:aquamarine">SẢN PHẨM THEO LOẠI</p>
+
+                @Html.Action("LoaiSP", "Home")
+                @*@Html.Action("ThuongHieu", "Home")*@
+              
+            <p class="lead" style="text-align:center;background-color:aquamarine">SẢN PHẨM THEO THƯƠNG HIỆU </p>
+                @Html.Action("ThuongHieu", "Home")
+            </div>
+
+            <div class="col-md-9">
+
+                <div class="row carousel-holder">
+
+                    <div class="col-md-12">
+                        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="item active">
+                                    <img class="slide-image" src="~/Images/hinhbaner1.jpg" alt="">
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src="~/Images/hinhbaner2.jpg" alt="">
+                                </div>
+                                <div class="item">
+                                    <img class="slide-image" src="~/Images/hinhbaner3.jpg" alt="">
+                                </div>
+                            </div>
+                            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                                <span class="glyphicon glyphicon-chevron-left"></span>
+                            </a>
+                            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                                <span class="glyphicon glyphicon-chevron-right"></span>
+                            </a>
+                        </div>
+                        <div>
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+    <footer class="bg-success text-white text-center text-lg-start">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!--Grid row-->
+            <div class="row">
+                <!--Grid column-->
+                <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">THÔNG TIN SHOP</h5>
+
+                    <p>
+                        Shop Bán Hàng Ô Tô Xe Du lịch xin kính chào quy khách hàng đã ghé website của chúng tôi
+                        rất hân hạnh phụ vụ tư vấn mua bán sản phẩm trên website
+                        rất hân hạnh mong quý khách hàng đóng góp ý kiến để shop phụ vụ quý khách hàng tốt hơn.
+                    </p>
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase">ĐỊA CHỈ SHOP</h5>
+
+                    <p> Địa Chỉ Shop : Quận 12 TP.Hồ Chí Minh </p>
+                    <p> Số Điện Thoại : + 0976972771 </p>
+                    <p> Địa Chỉ Email : Ngoctuan090398@gmail.com </p>
+                </div>
+                <!--Grid column-->
+                <!--Grid column-->
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="text-uppercase mb-0">GIỜ MỞ CỬA</h5>
+
+                    <p> Thời Gian Làm Việc : Thứ 2 - Thứ 7 </p>
+                    <p> Giờ Mở Cửa : 7.30 Am - 11.00 Pm </p>
+                    <p> Thời Gian Làm Việc : Chủ Nhật Nghỉ </p>
+                    <p> Giờ Mở Cửa : Nghỉ Làm Việc </p>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
+        </div>
+        <!-- Grid container -->
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            © 2021 Copyright: Designed by Huynh Ngoc Tuan
+
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- /.container -->
+    <!-- jQuery -->
+    <script src="~/Scripts/web/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Scripts/web/bootstrap.min.js"></script>
+</body>
+</html>
+<style>
+    .giohang {
+        float: right;
+        margin-top: 15px;
+    }
+</style>
+
+
+
+
+
